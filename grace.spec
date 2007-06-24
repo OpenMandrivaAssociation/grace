@@ -1,10 +1,6 @@
-%define name	grace
-%define version 5.1.18
-%define release 2mdk
-
-Name: %{name}
-Version: %{version}
-Release: %{release}
+Name: grace
+Version: 5.1.21
+Release: %mkrel 1
 Summary: Numerical Data Processing and Visualization Tool (Grace)
 License: GPL
 Url: http://plasma-gate.weizmann.ac.il/Grace/
@@ -14,7 +10,7 @@ Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: zlib-devel libjpeg-devel libtiff-devel lesstif-devel 
 BuildRequires: netcdf-devel libpng-devel t1lib-devel
-Requires: xterm mozilla
+Requires: xterm mozilla-firefox
 
 # NOTE: This can be rebuilt with pdflib-devel installed if you want to enable pdf
 # support. Keep in mind that pdflib is not free (Aladdin FPL).
@@ -71,14 +67,17 @@ rm -fr $RPM_BUILD_ROOT/%_libdir/grace/include
 mkdir -p $RPM_BUILD_ROOT/%_mandir/man1
 mv $RPM_BUILD_ROOT/%_libdir/grace/doc/*.1 $RPM_BUILD_ROOT/%_mandir/man1
 rm -fr $RPM_BUILD_ROOT/%_libdir/grace/doc
-ln -s %_docdir/%name-%version $RPM_BUILD_ROOT/%_libdir/grace/doc
+ln -s %_docdir/%name $RPM_BUILD_ROOT/%_libdir/grace/doc
 
-# menu
-install -d $RPM_BUILD_ROOT%{_menudir}
-cat << EOF > $RPM_BUILD_ROOT%{_menudir}/grace
-?package(grace):command="xmgrace" needs="x11" icon="grace.png"\
-                section="More Applications/Sciences/Other" title="Grace" \
-                longtitle="Graphical visualization of scientific data"
+install -d $RPM_BUILD_ROOT%{_datadir}/applications
+cat <<EOF > $RPM_BUILD_ROOT%{_datadir}/applications/madnriva-%{name.desktop}
+[Desktop Entry]
+Name=Grace
+Comment=Graphical visualization of scientific data
+Exec=xmgrace
+Icon=grace
+Type=Application
+Categories=Science;Education;2DGraphics;
 EOF
 
 # icons
@@ -110,7 +109,6 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/convcal
 %_bindir/fdf2fit
 %_bindir/grconvert
-%_menudir/grace
 %_miconsdir/grace.png
 %_iconsdir/grace.png
 %_liconsdir/grace.png
@@ -119,4 +117,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr (-,root,root)
 %_includedir/grace_np.h
 %_libdir/libgrace_np.a
-
