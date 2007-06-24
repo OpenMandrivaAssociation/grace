@@ -70,7 +70,7 @@ rm -fr $RPM_BUILD_ROOT/%_libdir/grace/doc
 ln -s %_docdir/%name $RPM_BUILD_ROOT/%_libdir/grace/doc
 
 install -d $RPM_BUILD_ROOT%{_datadir}/applications
-cat <<EOF > $RPM_BUILD_ROOT%{_datadir}/applications/madnriva-%{name.desktop}
+cat <<EOF > $RPM_BUILD_ROOT%{_datadir}/applications/madnriva-%{name}.desktop
 [Desktop Entry]
 Name=Grace
 Comment=Graphical visualization of scientific data
@@ -109,6 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/convcal
 %_bindir/fdf2fit
 %_bindir/grconvert
+%_datadir/applications/*.desktop
 %_miconsdir/grace.png
 %_iconsdir/grace.png
 %_liconsdir/grace.png
