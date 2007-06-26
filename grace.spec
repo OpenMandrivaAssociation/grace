@@ -1,6 +1,6 @@
 Name: grace
 Version: 5.1.21
-Release: %mkrel 2
+Release: %mkrel 3
 Summary: Numerical Data Processing and Visualization Tool (Grace)
 License: GPL
 Url: http://plasma-gate.weizmann.ac.il/Grace/
@@ -10,7 +10,7 @@ Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: zlib-devel libjpeg-devel libtiff-devel lesstif-devel 
 BuildRequires: netcdf-devel libpng-devel t1lib-devel
-Requires: xterm www-browser
+Requires: xterm webclient
 
 # NOTE: This can be rebuilt with pdflib-devel installed if you want to enable pdf
 # support. Keep in mind that pdflib is not free (Aladdin FPL).
