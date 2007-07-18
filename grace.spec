@@ -1,6 +1,6 @@
 Name: grace
 Version: 5.1.21
-Release: %mkrel 3
+Release: %mkrel 4
 Summary: Numerical Data Processing and Visualization Tool (Grace)
 License: GPL
 Url: http://plasma-gate.weizmann.ac.il/Grace/
@@ -70,7 +70,7 @@ rm -fr $RPM_BUILD_ROOT/%_libdir/grace/doc
 ln -s %_docdir/%name $RPM_BUILD_ROOT/%_libdir/grace/doc
 
 install -d $RPM_BUILD_ROOT%{_datadir}/applications
-cat <<EOF > $RPM_BUILD_ROOT%{_datadir}/applications/madnriva-%{name}.desktop
+cat <<EOF > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop
 [Desktop Entry]
 Name=Grace
 Comment=Graphical visualization of scientific data
@@ -81,22 +81,23 @@ Categories=Science;Education;2DGraphics;
 EOF
 
 # icons
-install -d $RPM_BUILD_ROOT%{_miconsdir}
-install -d $RPM_BUILD_ROOT%{_iconsdir}
-install -d $RPM_BUILD_ROOT%{_liconsdir}
-cd grace-icons;
-cp grace16.png $RPM_BUILD_ROOT%{_miconsdir}/grace.png;
-cp grace32.png $RPM_BUILD_ROOT%{_iconsdir}/grace.png;
-cp grace48.png $RPM_BUILD_ROOT%{_liconsdir}/grace.png;
+mkdir -p $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+pushd grace-icons
+cp grace16.png $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/grace.png
+cp grace32.png $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/grace.png
+cp grace48.png $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/grace.png
+popd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 %{update_menus}
+%{update_icon_cache hicolor}
 
 %postun
 %{clean_menus}
+%{clean_icon_cache hicolor}
 
 %files
 %defattr (-,root,root)
@@ -110,9 +111,9 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/fdf2fit
 %_bindir/grconvert
 %_datadir/applications/*.desktop
-%_miconsdir/grace.png
-%_iconsdir/grace.png
-%_liconsdir/grace.png
+%{_iconsdir}/hicolor/16x16/apps/grace.png
+%{_iconsdir}/hicolor/32x32/apps/grace.png
+%{_iconsdir}/hicolor/48x48/apps/grace.png
 
 %files devel
 %defattr (-,root,root)
