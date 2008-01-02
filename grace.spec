@@ -7,6 +7,7 @@ Url: http://plasma-gate.weizmann.ac.il/Grace/
 Source0: ftp://plasma-gate.weizmann.ac.il/pub/grace/src/%{name}-%{version}.tar.bz2
 Source1: grace-icons.tar.bz2
 Group: Sciences/Other
+BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: zlib-devel libjpeg-devel libtiff-devel lesstif-devel 
 BuildRequires: netcdf-devel libpng-devel t1lib-devel
 Requires: xterm webclient
