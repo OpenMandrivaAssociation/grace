@@ -1,10 +1,10 @@
 Name: grace
-Version: 5.1.21
-Release: %mkrel 4
+Version: 5.1.22
+Release: %mkrel 1
 Summary: Numerical Data Processing and Visualization Tool (Grace)
-License: GPL
+License: GPLv2+
 Url: http://plasma-gate.weizmann.ac.il/Grace/
-Source0: ftp://plasma-gate.weizmann.ac.il/pub/grace/src/%{name}-%{version}.tar.bz2
+Source0: ftp://plasma-gate.weizmann.ac.il/pub/grace/src/grace5/%name-%version.tar.gz
 Source1: grace-icons.tar.bz2
 Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
@@ -43,7 +43,7 @@ C and Fortran77 languages.
 %setup -a 1 -q
 
 %build
-%configure --enable-grace-home=%_libdir/grace 
+%configure2_5x --enable-grace-home=%_libdir/grace 
 %make
 
 %install
