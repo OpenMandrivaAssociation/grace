@@ -91,13 +91,17 @@ popd
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %mdkversion < 200900
 %post
 %{update_menus}
 %{update_icon_cache hicolor}
+%endif
 
+%if %mdkversion < 200900
 %postun
 %{clean_menus}
 %{clean_icon_cache hicolor}
+%endif
 
 %files
 %defattr (-,root,root)
