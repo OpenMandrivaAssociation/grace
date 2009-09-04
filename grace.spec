@@ -1,6 +1,6 @@
 Name: grace
 Version: 5.1.22
-Release: %mkrel 3
+Release: %mkrel 4
 Summary: Numerical Data Processing and Visualization Tool (Grace)
 License: GPLv2+
 Url: http://plasma-gate.weizmann.ac.il/Grace/
