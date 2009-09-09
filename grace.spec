@@ -6,11 +6,18 @@ License: GPLv2+
 Url: http://plasma-gate.weizmann.ac.il/Grace/
 Source0: ftp://plasma-gate.weizmann.ac.il/pub/grace/src/grace5/%name-%version.tar.gz
 Source1: grace-icons.tar.bz2
+Patch0: svgdrv_stringliteral.patch
+Patch1: utils_stringliteral.patch
 Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
-BuildRequires: zlib-devel libjpeg-devel libtiff-devel lesstif-devel 
-BuildRequires: netcdf-devel libpng-devel t1lib-devel lesstif-devel
-Requires: xterm webclient
+BuildRequires: jpeg-devel
+BuildRequires: netcdf-devel
+BuildRequires: lesstif-devel 
+BuildRequires: tiff-devel
+BuildRequires: zlib-devel
+
+Requires: webclient
+Requires: xterm
 
 # NOTE: This can be rebuilt with pdflib-devel installed if you want to enable pdf
 # support. Keep in mind that pdflib is not free (Aladdin FPL).
@@ -41,9 +48,11 @@ C and Fortran77 languages.
 %prep
 
 %setup -a 1 -q
+%patch0 -p 1
+%patch1
 
 %build
-%configure2_5x --enable-grace-home=%_libdir/grace 
+%configure2_5x --enable-grace-home=%_libdir/grace --with-helpviewer="xdg-open %s"
 %make
 
 %install
