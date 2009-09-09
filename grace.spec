@@ -9,7 +9,7 @@ Source1: grace-icons.tar.bz2
 Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: zlib-devel libjpeg-devel libtiff-devel lesstif-devel 
-BuildRequires: netcdf-devel libpng-devel t1lib-devel
+BuildRequires: netcdf-devel libpng-devel t1lib-devel lesstif-devel
 Requires: xterm webclient
 
 # NOTE: This can be rebuilt with pdflib-devel installed if you want to enable pdf
