@@ -12,7 +12,7 @@ Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: jpeg-devel
 BuildRequires: netcdf-devel
-BuildRequires: %mklibname -d lesstif
+BuildRequires: lesstif-devel
 BuildRequires: tiff-devel
 BuildRequires: zlib-devel
 
@@ -52,7 +52,12 @@ C and Fortran77 languages.
 %patch1
 
 %build
-%configure2_5x --enable-grace-home=%_libdir/grace --with-helpviewer="xdg-open %s"
+%configure2_5x --enable-grace-home=%_libdir/grace \
+	       --with-helpviewer="xdg-open %s"  \
+	       --with-x \
+	       --x-includes=%_libdir \
+	       --x-libraries=%_libdir
+
 %make
 
 %install
