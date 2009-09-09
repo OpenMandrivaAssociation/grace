@@ -12,7 +12,7 @@ Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: jpeg-devel
 BuildRequires: netcdf-devel
-BuildRequires: lesstif-devel 
+BuildRequires: %mklibname -d lesstif
 BuildRequires: tiff-devel
 BuildRequires: zlib-devel
 
