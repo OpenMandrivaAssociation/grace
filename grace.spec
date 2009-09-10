@@ -17,7 +17,6 @@ Source0: ftp://plasma-gate.weizmann.ac.il/pub/grace/src/grace5/%name-%version.ta
 Source1: grace-icons.tar.bz2
 Patch0: svgdrv_stringliteral.patch
 Patch1: utils_stringliteral.patch
-Patch2: iftrace_formatliteral.path
 Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: jpeg-devel
@@ -58,7 +57,6 @@ C and Fortran77 languages.
 %setup -a 1 -q
 %patch0 -p 1
 %patch1
-%patch2
 
 %build
 %configure2_5x --enable-grace-home=%_libdir/grace \
