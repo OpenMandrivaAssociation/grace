@@ -1,3 +1,12 @@
+# NOTE: this is needed to avoid broken macro format in 
+# T1lib/type1/objects.c
+# T1lib/type1/type1.c (presumably others)
+# since IfTrace0 macro does not include the format string
+# Upstream is warned
+# All other formats are fixed in the patched files (sent upstream also)
+
+%define Werror_cflags %nil
+
 Name: grace
 Version: 5.1.22
 Release: %mkrel 4
@@ -8,12 +17,14 @@ Source0: ftp://plasma-gate.weizmann.ac.il/pub/grace/src/grace5/%name-%version.ta
 Source1: grace-icons.tar.bz2
 Patch0: svgdrv_stringliteral.patch
 Patch1: utils_stringliteral.patch
+Patch2: iftrace_formatliteral.path
 Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: jpeg-devel
 BuildRequires: netcdf-devel
 BuildRequires: lesstif-devel
 BuildRequires: tiff-devel
+BuildRequires: %mklibname -d xext 6
 BuildRequires: zlib-devel
 
 Requires: webclient
@@ -29,9 +40,6 @@ cross- and auto-correlation, differences, integrals, histograms, and
 much more. The generated figures are of high quality.  Grace is a very
 convenient tool for data inspection, data transformation, and for
 making figures for publications.
-
-NOTE: The help browser requires netscape or any browser linked to that
-executable name.  Otherwise, help files are in /usr/share/doc, as usual.
 
 %package devel
 Group:		Development/Other
@@ -50,6 +58,7 @@ C and Fortran77 languages.
 %setup -a 1 -q
 %patch0 -p 1
 %patch1
+%patch2
 
 %build
 %configure2_5x --enable-grace-home=%_libdir/grace \
