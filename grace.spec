@@ -9,7 +9,7 @@
 
 Name: grace
 Version: 5.1.22
-Release: %mkrel 4
+Release: %mkrel 5
 Summary: Numerical Data Processing and Visualization Tool (Grace)
 License: GPLv2+
 Url: http://plasma-gate.weizmann.ac.il/Grace/
@@ -17,6 +17,9 @@ Source0: ftp://plasma-gate.weizmann.ac.il/pub/grace/src/grace5/%name-%version.ta
 Source1: grace-icons.tar.bz2
 Patch0: svgdrv_stringliteral.patch
 Patch1: utils_stringliteral.patch
+# Fixes the mouse stuck in the window, fix for #58242
+# Comes from http://plasma-gate.weizmann.ac.il/Grace/phpbb/viewtopic.php?t=1813
+Patch2: mouse_stuck_in_the_window.patch
 Group: Sciences/Other
 BuildRoot: %{_tmppath}/%{name}-buildroot
 BuildRequires: jpeg-devel
@@ -57,6 +60,7 @@ C and Fortran77 languages.
 %setup -a 1 -q
 %patch0 -p 1
 %patch1
+%patch2 -p 1
 
 %build
 %configure2_5x --enable-grace-home=%_libdir/grace \
