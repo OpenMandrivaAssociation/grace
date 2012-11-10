@@ -1,0 +1,24 @@
+diff -p -up ./src/utils.c.orig ./src/utils.c
+--- ./src/utils.c.orig	2007-02-15 23:36:54.000000000 +0100
++++ ./src/utils.c	2009-09-09 18:07:00.000000000 +0200
+@@ -1166,17 +1166,17 @@ int yesno(char *msg, char *s1, char *s2,
+ void stufftext(char *s)
+ {
+ #ifdef NONE_GUI
+-    printf(s);
++    printf("%s", s);
+ #else
+     if (inwin) {
+         stufftextwin(s);
+     } else {
+-        printf(s);
++        printf("%s", s);
+     }
+ #endif
+     /* log results to file */
+     if (resfp != NULL) {
+-	fprintf(resfp, s);
++      fprintf(resfp, "%s", s);
+     }
+ }
+ 

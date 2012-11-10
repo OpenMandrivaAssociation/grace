@@ -1,0 +1,12 @@
+diff -p -up grace-5.1.22/src/svgdrv.c_orig grace-5.1.22/src/svgdrv.c
+--- grace-5.1.22/src/svgdrv.c_orig	2009-09-09 17:07:02.000000000 +0200
++++ grace-5.1.22/src/svgdrv.c	2009-09-09 17:08:48.000000000 +0200
+@@ -745,7 +745,7 @@ void svg_puttext(VPoint vp, char *s, int
+             -tm->cxy, -tm->cyy,
+             scaleval(vp.x), scaleval(vp.y));
+ 
+-    fprintf(prstream, escape_specials((unsigned char *) s, len));
++    fprintf(prstream, "%s", escape_specials((unsigned char *) s, len));
+ 
+     fprintf(prstream, "</text>\n");
+ }
