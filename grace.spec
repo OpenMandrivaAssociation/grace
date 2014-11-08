@@ -10,7 +10,7 @@
 
 Name:		grace
 Version:	5.1.22
-Release:	7
+Release:	9
 Summary:	Numerical Data Processing and Visualization Tool (Grace)
 License:	GPLv2+
 Url:		http://plasma-gate.weizmann.ac.il/Grace/
@@ -28,7 +28,6 @@ BuildRequires:	lesstif-devel
 BuildRequires:	pkgconfig(libtiff-4)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(zlib)
-
 Requires:	webclient
 Requires:	xterm
 
@@ -63,38 +62,39 @@ C and Fortran77 languages.
 %patch2 -p 1
 
 %build
-%configure2_5x --enable-grace-home=%_libdir/grace \
-	       --with-helpviewer="xdg-open %s"  \
-	       --with-x \
-	       --x-includes=%_libdir \
-	       --x-libraries=%_libdir
+%configure \
+	--enable-grace-home=%{_libdir}/grace \
+	--with-helpviewer="xdg-open %s"  \
+	--with-x \
+	--x-includes=%{_libdir} \
+	--x-libraries=%{_libdir}
 
 %make
 
 %install
-%makeinstall GRACE_HOME=$RPM_BUILD_ROOT/%_libdir/grace
+%makeinstall GRACE_HOME=%{buildroot}/%{_libdir}/grace
 
 #fixup binaries
-mkdir $RPM_BUILD_ROOT/%_bindir
-mv $RPM_BUILD_ROOT/%_libdir/grace/bin/* $RPM_BUILD_ROOT/%_bindir
-rm -fr $RPM_BUILD_ROOT/%_libdir/grace/bin
-ln -s %_bindir/xmgrace $RPM_BUILD_ROOT/%_bindir/grace
+mkdir %{buildroot}/%{_bindir}
+mv %{buildroot}/%{_libdir}/grace/bin/* %{buildroot}/%{_bindir}
+rm -fr %{buildroot}/%{_libdir}/grace/bin
+ln -s %{_bindir}/xmgrace %{buildroot}/%{_bindir}/grace
 
 #fixup devel files
-mv $RPM_BUILD_ROOT/%_libdir/grace/lib/* $RPM_BUILD_ROOT/%_libdir
-rm -fr $RPM_BUILD_ROOT/%_libdir/grace/lib
-mkdir $RPM_BUILD_ROOT/%_includedir
-mv $RPM_BUILD_ROOT/%_libdir/grace/include/* $RPM_BUILD_ROOT/%_includedir
-rm -fr $RPM_BUILD_ROOT/%_libdir/grace/include
+mv %{buildroot}/%{_libdir}/grace/lib/* %{buildroot}/%{_libdir}
+rm -fr %{buildroot}/%{_libdir}/grace/lib
+mkdir %{buildroot}/%{_includedir}
+mv %{buildroot}/%{_libdir}/grace/include/* %{buildroot}/%{_includedir}
+rm -fr %{buildroot}/%{_libdir}/grace/include
 
 #fixup documentation
-mkdir -p $RPM_BUILD_ROOT/%_mandir/man1
-mv $RPM_BUILD_ROOT/%_libdir/grace/doc/*.1 $RPM_BUILD_ROOT/%_mandir/man1
-rm -fr $RPM_BUILD_ROOT/%_libdir/grace/doc
-ln -s %_docdir/%name $RPM_BUILD_ROOT/%_libdir/grace/doc
+mkdir -p %{buildroot}/%{_mandir}/man1
+mv %{buildroot}/%{_libdir}/grace/doc/*.1 %{buildroot}/%{_mandir}/man1
+rm -fr %{buildroot}/%{_libdir}/grace/doc
+ln -s %{_docdir}/%{name} %{buildroot}/%{_libdir}/grace/doc
 
-install -d $RPM_BUILD_ROOT%{_datadir}/applications
-cat <<EOF > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop
+install -d %{buildroot}%{_datadir}/applications
+cat <<EOF > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop
 [Desktop Entry]
 Name=Grace
 Comment=Graphical visualization of scientific data
@@ -105,31 +105,29 @@ Categories=Science;Education;2DGraphics;
 EOF
 
 # icons
-mkdir -p $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
 pushd grace-icons
-cp grace16.png $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/grace.png
-cp grace32.png $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps/grace.png
-cp grace48.png $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/grace.png
+cp grace16.png %{buildroot}%{_iconsdir}/hicolor/16x16/apps/grace.png
+cp grace32.png %{buildroot}%{_iconsdir}/hicolor/32x32/apps/grace.png
+cp grace48.png %{buildroot}%{_iconsdir}/hicolor/48x48/apps/grace.png
 popd
 
 %files
-%defattr (-,root,root)
 %doc CHANGES COPYRIGHT DEVELOPERS LICENSE README ChangeLog doc/*.html doc/*.png
-%_mandir/man1/*
-%_libdir/grace
-%_bindir/grace
-%_bindir/gracebat
-%_bindir/xmgrace
-%_bindir/convcal
-%_bindir/fdf2fit
-%_bindir/grconvert
-%_datadir/applications/*.desktop
+%{_mandir}/man1/*
+%{_libdir}/grace
+%{_bindir}/grace
+%{_bindir}/gracebat
+%{_bindir}/xmgrace
+%{_bindir}/convcal
+%{_bindir}/fdf2fit
+%{_bindir}/grconvert
+%{_datadir}/applications/*.desktop
 %{_iconsdir}/hicolor/16x16/apps/grace.png
 %{_iconsdir}/hicolor/32x32/apps/grace.png
 %{_iconsdir}/hicolor/48x48/apps/grace.png
 
 %files devel
 %defattr (-,root,root)
-%_includedir/grace_np.h
-%_libdir/libgrace_np.a
-
+%{_includedir}/grace_np.h
+%{_libdir}/libgrace_np.a
