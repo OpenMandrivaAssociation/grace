@@ -9,8 +9,8 @@
 %define Werror_cflags %nil
 
 Name:		grace
-Version:	5.1.22
-Release:	9
+Version:	5.1.24
+Release:	1
 Summary:	Numerical Data Processing and Visualization Tool (Grace)
 License:	GPLv2+
 Url:		http://plasma-gate.weizmann.ac.il/Grace/
@@ -25,6 +25,8 @@ Group:		Sciences/Other
 BuildRequires:	jpeg-devel
 BuildRequires:	netcdf-devel
 BuildRequires:	lesstif-devel
+BuildRequires:	t1lib-devel
+BuildRequires:	Xbae-devel
 BuildRequires:	pkgconfig(libtiff-4)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(zlib)
@@ -64,8 +66,12 @@ C and Fortran77 languages.
 %build
 %configure \
 	--enable-grace-home=%{_libdir}/grace \
-	--with-helpviewer="xdg-open %s"  \
+	--with-helpviewer="xdg-open %s" \
+	--with-editor="xdg-open %s" \
 	--with-x \
+	--disable-xmhtml \
+	--without-bundled-xbae \
+	--without-bundled-t1lib \
 	--x-includes=%{_libdir} \
 	--x-libraries=%{_libdir}
 
@@ -128,6 +134,5 @@ popd
 %{_iconsdir}/hicolor/48x48/apps/grace.png
 
 %files devel
-%defattr (-,root,root)
 %{_includedir}/grace_np.h
 %{_libdir}/libgrace_np.a
