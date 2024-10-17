@@ -13,7 +13,7 @@ Version:	5.1.24
 Release:	2
 Summary:	Numerical Data Processing and Visualization Tool (Grace)
 License:	GPLv2+
-Url:		http://plasma-gate.weizmann.ac.il/Grace/
+Url:		https://plasma-gate.weizmann.ac.il/Grace/
 Source0:	ftp://plasma-gate.weizmann.ac.il/pub/grace/src/grace5/%name-%version.tar.gz
 Source1:	grace-icons.tar.bz2
 Patch0:		svgdrv_stringliteral.patch
