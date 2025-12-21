@@ -22,6 +22,11 @@ Patch1:		utils_stringliteral.patch
 # Comes from http://plasma-gate.weizmann.ac.il/Grace/phpbb/viewtopic.php?t=1813
 Patch2:		mouse_stuck_in_the_window.patch
 Group:		Sciences/Other
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	jpeg-devel
 BuildRequires:	netcdf-devel
 BuildRequires:	lesstif-devel
